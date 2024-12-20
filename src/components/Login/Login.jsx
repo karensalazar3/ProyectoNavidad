@@ -1,13 +1,21 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useContext } from "react";
-import { UserContext } from "../../context/UserContext/UserState"
+import { UserContext } from "../../context/UserContext/UserState";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const {login} = useContext(UserContext)
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Success:", values);
-    login(values)
+    try {
+      await login(values);
+      message.success("Login exitoso");
+      navigate("/"); 
+    } catch (error) {
+      message.error(error.message || "Error al iniciar sesión. Por favor verifica tus credenciales.");
+    }
   };
 
   return (
@@ -35,7 +43,7 @@ const Login = () => {
           rules={[
             {
               required: true,
-              message: "Please input your email!",
+              message: "Por favor ingresa tu email!",
             },
           ]}
         >
@@ -48,18 +56,16 @@ const Login = () => {
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: "Por favor ingresa tu contraseña!",
             },
           ]}
         >
           <Input.Password />
         </Form.Item>
 
-       
-
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Iniciar sesión
           </Button>
         </Form.Item>
       </Form>

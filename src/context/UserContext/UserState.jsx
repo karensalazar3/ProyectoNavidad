@@ -18,14 +18,19 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
   const login = async (user) => {
-    const res = await axios.post(API_URL + "/login", user);
-    dispatch({
-      type: "LOGIN",
-      payload: res.data,
-    });
-    if (res.data) {
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+    try {
+      const res = await axios.post(API_URL + "/login", user);
+      dispatch({
+        type: "LOGIN",
+        payload: res.data,
+      });
+      if (res.data) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+      }
+    } catch (error) {
+      // Manejo de errores: si la autenticación falla
+      throw new Error(error.response?.data?.message || "Error al iniciar sesión");
     }
   };
 
@@ -36,7 +41,7 @@ export const UserProvider = ({ children }) => {
         Authorization: token,
       },
     });
-    //modifica el estado (en este caso modifica user y lo rellena con la información que llega de la petición)
+    // Modifica el estado (en este caso modifica 'user' y lo rellena con la información que llega de la petición)
     dispatch({
       type: "GET_USER_INFO",
       payload: res.data,
@@ -50,7 +55,7 @@ export const UserProvider = ({ children }) => {
         Authorization: token,
       },
     });
-    //modifica estado
+    // Modifica estado
     dispatch({
       type: "LOGOUT",
     });
@@ -66,7 +71,7 @@ export const UserProvider = ({ children }) => {
         user: state.user,
         login,
         getUserInfo,
-        logout
+        logout,
       }}
     >
       {children}

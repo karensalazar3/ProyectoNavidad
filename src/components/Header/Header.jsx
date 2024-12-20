@@ -9,6 +9,7 @@ const Header = () => {
   const { user, logout } = useContext(UserContext);
   const { cart } = useContext(ProductContext);
 
+  console.log(cart)
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -16,9 +17,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logoutUser = () => {
-    //desloguee el usuario
     logout();
-    //me redirija a login
     navigate("/login");
   };
   return (
