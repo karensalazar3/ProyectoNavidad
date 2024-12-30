@@ -17,7 +17,8 @@ const ProductReducer = (state, action) => {
         ...state,
         cart: action.payload,
       };
-
+      case "CLEAR_CART":
+        return { ...state, cart: [] }; 
     default:
       return state;
   }

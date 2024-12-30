@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(res.data.user));
       }
     } catch (error) {
-      // Manejo de errores: si la autenticación falla
+      
       throw new Error(error.response?.data?.message || "Error al iniciar sesión");
     }
   };
@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
         Authorization: token,
       },
     });
-    // Modifica el estado (en este caso modifica 'user' y lo rellena con la información que llega de la petición)
+    
     dispatch({
       type: "GET_USER_INFO",
       payload: res.data,
@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
         Authorization: token,
       },
     });
-    // Modifica estado
+  
     dispatch({
       type: "LOGOUT",
     });
