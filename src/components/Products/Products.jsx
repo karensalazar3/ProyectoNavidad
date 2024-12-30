@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Button, Card, Spin, message } from "antd"; 
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import './Products.scss';  
-
 
 const Products = () => {
   const { fetchProducts, products, loading, error,addCart } = useContext(ProductContext); 

@@ -4,6 +4,8 @@ import { UserContext } from "../../context/UserContext/UserState";
 import { Avatar, Space, Button, Badge } from "antd";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import "./Header.scss";
+
 
 const Header = () => {
   const { user, logout } = useContext(UserContext);

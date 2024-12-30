@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Empty } from 'antd';
 import { DeleteOutlined } from "@ant-design/icons";
 import { ProductContext } from '../../context/ProductContext/ProductState';
+import './Cart.scss';
 
 const Cart = () => {
   const { cart, clearCart, createOrder } = useContext(ProductContext);
