@@ -8,6 +8,7 @@ import Cart from "./components/Cart/Cart";
 import { UserProvider } from "./context/UserContext/UserState";
 import { ProductProvider } from "./context/ProductContext/ProductState";
 import Register from "./components/Register/Register";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -16,13 +17,17 @@ function App() {
         <BrowserRouter>
           <ProductProvider>
               <Header />
+              <main>
               <Routes>
                 <Route path="/" element={<Products />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/footer" element={<Footer />} />
               </Routes>
+              </main>
           </ProductProvider>
         </BrowserRouter>
       </UserProvider>
