@@ -1,4 +1,4 @@
-@import "../../styles/colors.scss"; 
+@use "../../styles/colors.scss" as*; 
 
 .register-container {
   background-color: #333;
@@ -34,7 +34,7 @@
     border-color:  #f06292; 
 
     &:hover {
-      background-color: lighten( #f06292, 10%);
+      background-color:( #f06292, 10%);
     }
   }
 }

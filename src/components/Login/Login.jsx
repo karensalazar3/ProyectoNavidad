@@ -1,14 +1,14 @@
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message } from "antd"; 
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
+import "./Login.scss";
 
 const Login = () => {
   const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
     try {
       await login(values);
       message.success("Login exitoso");
@@ -19,9 +19,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <h2>Iniciar Sesión</h2>
       <Form
-        name="basic"
+        name="login"
         labelCol={{
           span: 8,
         }}
@@ -30,9 +31,6 @@ const Login = () => {
         }}
         style={{
           maxWidth: 600,
-        }}
-        initialValues={{
-          remember: true,
         }}
         onFinish={onFinish}
         autoComplete="off"
@@ -45,13 +43,17 @@ const Login = () => {
               required: true,
               message: "Por favor ingresa tu email!",
             },
+            {
+              type: "email",
+              message: "Por favor ingresa un email válido!",
+            },
           ]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Contraseña"
           name="password"
           rules={[
             {
@@ -63,7 +65,7 @@ const Login = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item label={null}>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Iniciar sesión
           </Button>

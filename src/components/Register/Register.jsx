@@ -2,7 +2,7 @@ import { Button, Form, Input, notification } from "antd";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
-import "./Register.scss"; // Estilo del componente
+import "./Register.scss";
 
 const Register = () => {
   const { login } = useContext(UserContext);

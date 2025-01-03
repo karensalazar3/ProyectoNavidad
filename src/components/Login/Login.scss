@@ -1,0 +1,40 @@
+
+.login-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 3rem auto;
+  text-align: center;
+
+  h2 {
+    color:  #f06292; 
+    margin-bottom: 1.5rem;
+  }
+
+  .ant-form-item {
+    margin-bottom: 1.5rem;
+
+    label {
+      color:  #333;
+    }
+
+    .ant-input,
+    .ant-input-password {
+      border-radius: 4px;
+    }
+  }
+
+  .ant-btn {
+    width: 100%;
+    background-color:  #f06292; 
+    border: none;
+
+    &:hover {
+      background-color: ( #f06292, 10%);
+    }
+  }
+}
+
+

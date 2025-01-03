@@ -1,17 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
-import { Avatar, Space, Button, Badge } from "antd";
+import { Avatar, Space, Button, Badge, Menu, Dropdown } from "antd";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import "./Header.scss";
-
 
 const Header = () => {
   const { user, logout } = useContext(UserContext);
   const { cart } = useContext(ProductContext);
 
-  console.log(cart)
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -22,29 +20,44 @@ const Header = () => {
     logout();
     navigate("/login");
   };
+
+  const userMenu = (
+    <Menu>
+      <Menu.Item key="profile">
+        <Link to="/profile">Perfil</Link>
+      </Menu.Item>
+      <Menu.Item key="logout">
+        <Button onClick={logoutUser} type="link">
+          Cerrar sesión
+        </Button>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <div>
-      <Link to="/">Home </Link>
-      {user ? (
-        <>
-          <Link to="/cart">
-            <Badge count={cart.length}>
-              <ShoppingCartOutlined />
-            </Badge>{" "}
-            /
-          </Link>
-          <Link to="/profile">
-            <Space size={16} wrap>
-              <Avatar>{user.name[0]}</Avatar>
-            </Space>
-          </Link>{" "}
-          /<Button onClick={logoutUser}> Logout</Button>
-        </>
-      ) : (
-        <>
-          / <Link to="/login"> Login</Link>
-        </>
-      )}
+    <div className="header">
+      <div className="header-logo">
+        <Link to="/">Adornate con amor</Link>
+      </div>
+      <div className="header-links">
+        <Link to="/">Inicio</Link>
+        {user ? (
+          <>
+            <Link to="/cart">
+              <Badge count={cart.length} showZero>
+                <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />
+              </Badge>
+            </Link>
+            <Dropdown overlay={userMenu} placement="bottomRight">
+              <Space size={16} className="header-user">
+                <Avatar>{user.name[0].toUpperCase()}</Avatar>
+              </Space>
+            </Dropdown>
+          </>
+        ) : (
+          <Link to="/login">Iniciar sesión</Link>
+        )}
+      </div>
     </div>
   );
 };

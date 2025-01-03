@@ -6,7 +6,7 @@ import "./Cart.scss";
 
 const Cart = () => {
   const { cart, clearCart, createOrder } = useContext(ProductContext);
-  const [loading, setLoading] = useState(false); // Estado para manejar el botón de crear pedido
+  const [loading, setLoading] = useState(false); 
 
   const handleCreateOrder = async () => {
     try {

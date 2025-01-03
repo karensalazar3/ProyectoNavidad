@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
@@ -11,27 +11,29 @@ import Register from "./components/Register/Register";
 import Footer from "./components/Footer/Footer";
 
 function App() {
+  // Si el usuario no está logueado y trata de acceder al perfil, lo redirige a login
+  const isLoggedIn = localStorage.getItem("token");  // O verifica según el estado del contexto
+
   return (
-    <>
-      <UserProvider>
-        <BrowserRouter>
-          <ProductProvider>
-              <Header />
-              <main>
-              <Routes>
-                <Route path="/" element={<Products />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/footer" element={<Footer />} />
-              </Routes>
-              </main>
-          </ProductProvider>
-        </BrowserRouter>
-      </UserProvider>
-    </>
+    <UserProvider>
+      <BrowserRouter>
+        <ProductProvider>
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<Products />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
+
+            </Routes>
+          </main>
+          <Footer />
+        </ProductProvider>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 

@@ -1,72 +1,59 @@
 
-@import '../../styles/colors.scss';
-
-
-.header-container {
-  background-color: #333; ; 
-  color: #fff; 
+.header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  background-color: #f8bbd0;
+  padding: 0.5rem 2rem;
+  box-shadow:  4px 8px rgba(0, 0, 0, 0.1);
+  color:  #fff;
+  border-radius: 8px 8px 0 0;
 
-  a {
-    color: #f06292;  
-    text-decoration: none;
+  .header-logo {
+    font-size: 1.5rem;
     font-weight: bold;
-    margin: 0 10px;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    color:  #f06292; 
 
-    &:hover {
-      color:  #f8bbd0; 
-    }
-  }
-
-  .left-section, .right-section {
-    display: flex;
-    align-items: center;
-  }
-
-  .cart {
-    display: flex;
-    align-items: center;
-
-    .cart-icon {
-      font-size: 1.5rem;
-      color: $primary-color;
+    a {
+      text-decoration: none;
+      color: inherit;
 
       &:hover {
-        color: #f8bbd0; 
+        color:( #f06292, 10%);
       }
     }
   }
 
-  .user-section {
+  .header-links {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.5rem;
 
-    .avatar {
-      background-color:  #f06292; 
-      color: $white;
-      font-weight: bold;
+    a {
+      text-decoration: none;
+      color:  #fff;
+      font-size: 1rem;
+
+      &:hover {
+        color: #f06292; 
+      }
     }
-  }
 
-  .logout-button {
-    background-color:  #f06292; 
-    color: $white;
-    border: none;
-    font-weight: bold;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    .header-user {
+      cursor: pointer;
 
-    &:hover {
-      background-color: darken($primary-color, 10%);
+      .ant-avatar {
+        background-color:  #f06292; 
+      }
     }
   }
 }
+
+
+$primary-color: #f06292;  //    Rosa fuerte
+$secondary-color: #f8bbd0; // Rosa pastel
+$background-color: #333; // Negro
+/* $text-color: #c60599; Fucsia */
+$white: #fff; // Blanco
+$gray: #9e9e9e; // Gris
+$black: #000; // Negro estándar

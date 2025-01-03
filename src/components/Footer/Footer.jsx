@@ -1,11 +1,10 @@
 import React from "react";
-import "./Footer.scss"; // Asegúrate de tener el archivo SCSS enlazado
-
+import "./Footer.scss"; 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__content">
-        <p className="footer__text">© {new Date().getFullYear()} E-commerce App. Todos los derechos reservados.</p>
+        <p className="footer__text">© {new Date().getFullYear()} Adornate con amor 'Productos Hechos a mano con mucho amor'.</p>
         <nav className="footer__nav">
           <a href="/home" className="footer__link">Inicio</a>
           <a href="/products" className="footer__link">Productos</a>
