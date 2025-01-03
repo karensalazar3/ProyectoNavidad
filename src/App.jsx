@@ -5,14 +5,13 @@ import Profile from "./components/Profile/Profile";
 import Header from "./components/Header/Header";
 import Products from "./components/Products/Products";
 import Cart from "./components/Cart/Cart";
-import { UserProvider } from "./context/UserContext/UserState";
+import { UserProvider} from "./context/UserContext/UserState";
 import { ProductProvider } from "./context/ProductContext/ProductState";
 import Register from "./components/Register/Register";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  // Si el usuario no está logueado y trata de acceder al perfil, lo redirige a login
-  const isLoggedIn = localStorage.getItem("token");  // O verifica según el estado del contexto
+  const isLoggedIn = localStorage.getItem("token");  
 
   return (
     <UserProvider>

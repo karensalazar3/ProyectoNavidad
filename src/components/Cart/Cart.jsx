@@ -6,7 +6,7 @@ import "./Cart.scss";
 
 const Cart = () => {
   const { cart, clearCart, createOrder } = useContext(ProductContext);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleCreateOrder = async () => {
     try {
@@ -16,7 +16,7 @@ const Cart = () => {
         message: "Pedido creado",
         description: "Tu pedido se ha creado exitosamente.",
       });
-      clearCart();
+      clearCart(); // Vacia el carrito desde el contexto
     } catch (error) {
       console.error("Error al crear el pedido:", error);
       notification.error({
@@ -42,7 +42,7 @@ const Cart = () => {
       <div className="cart-products">
         {cart.map((product) => (
           <Card
-            key={product._id}
+            key={product._id} 
             className="cart-product-card"
             title={product.name}
             bordered={false}
@@ -53,7 +53,7 @@ const Cart = () => {
         ))}
       </div>
       <h3 className="cart-total">
-        Total: {cart.reduce((sum, product) => sum + product.price, 0)} €
+      Total: {cart.reduce((sum, product) => sum + (parseFloat(product.price) || 0), 0)} €
       </h3>
       <div className="cart-actions">
         <Button onClick={clearCart} danger icon={<DeleteOutlined />}>

@@ -61,7 +61,6 @@ const Register = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
-        {/* Campo de Email */}
         <Form.Item
           label="Email"
           name="email"
