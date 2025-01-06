@@ -11,16 +11,16 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       await login(values);
-      message.success("Login exitoso");
+      message.success("Login successful");
       navigate("/"); 
     } catch (error) {
-      message.error(error.message || "Error al iniciar sesión. Por favor verifica tus credenciales.");
+      message.error(error.message || "Error logging in. Please check your credentials.");
     }
   };
 
   return (
     <div className="login-container">
-      <h2>Iniciar Sesión</h2>
+      <h2>Login</h2>
       <Form
         name="login"
         labelCol={{
@@ -41,11 +41,11 @@ const Login = () => {
           rules={[
             {
               required: true,
-              message: "Por favor ingresa tu email!",
+              message: "Please enter your email!",
             },
             {
               type: "email",
-              message: "Por favor ingresa un email válido!",
+              message: "Please enter a valid email!",
             },
           ]}
         >
@@ -53,12 +53,12 @@ const Login = () => {
         </Form.Item>
 
         <Form.Item
-          label="Contraseña"
+          label="Password"
           name="password"
           rules={[
             {
               required: true,
-              message: "Por favor ingresa tu contraseña!",
+              message: "Please enter your password!",
             },
           ]}
         >
@@ -67,7 +67,7 @@ const Login = () => {
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Iniciar sesión
+            Login
           </Button>
         </Form.Item>
       </Form>

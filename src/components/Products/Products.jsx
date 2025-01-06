@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext/ProductState";
 import { Button, Card, Spin, message } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import logo from '../../assets/logo.jpg';
 import "./Products.scss";
 
 const Products = () => {
@@ -14,7 +15,7 @@ const Products = () => {
       try {
         await fetchProducts();
       } catch (err) {
-        message.error("Error al cargar los productos.");
+        message.error("Error loading products.");
       } finally {
         setLocalLoading(false);
       }
@@ -24,7 +25,7 @@ const Products = () => {
   }, []);
 
   if (error) {
-    return <div>Error al cargar los productos. {error.message}</div>;
+    return <div>Error loading products. {error.message}</div>;
   }
 
   if (localLoading || loading) {
@@ -33,10 +34,10 @@ const Products = () => {
 
   return (
     <div className="container">
-      <h2>Productos</h2>
+      <h2>Products</h2>
       <div className="product-list">
         {products.length === 0 ? (
-          <div>No hay productos disponibles.</div>
+          <div>No products available.</div>
         ) : (
           products.map((product) => (
             <Card
@@ -45,10 +46,12 @@ const Products = () => {
               bordered={false}
               style={{ width: 300 }}
             >
-              {/* Mostrar la imagen del producto */}
-              
-
-
+              {/* Display product image */}
+              <img
+                src={logo}
+                alt="Logo"
+                style={{ width: '100%', height: 'auto' }}
+              />
               <p>{product.price} €</p>
               <Button
                 type="default"

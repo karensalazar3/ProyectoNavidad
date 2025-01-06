@@ -1,4 +1,4 @@
-import { Button, Form, Input, notification } from "antd";
+import { Button, Form, Input, notification, DatePicker } from "antd"; // Import DatePicker
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
@@ -11,13 +11,19 @@ const Register = () => {
   const onFinish = async (values) => {
     console.log("Register Success:", values);
 
+    // Make sure the birthdate is in the correct format (YYYY-MM-DD)
+    const formattedValues = {
+      ...values,
+      birthdate: values.birthdate ? values.birthdate.toISOString().split('T')[0] : "", // Format the date to "YYYY-MM-DD"
+    };
+
     try {
       const response = await fetch("http://localhost:3000/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(formattedValues),
       });
 
       const data = await response.json();
@@ -29,29 +35,29 @@ const Register = () => {
         login(data);
 
         notification.success({
-          message: "Registro Exitoso",
-          description: "El usuario ha sido registrado con éxito.",
+          message: "Registration Successful",
+          description: "The user has been successfully registered.",
         });
 
         navigate("/profile");
       } else {
         notification.error({
-          message: "Error en el Registro",
-          description: data.message || "Hubo un error al registrar el usuario.",
+          message: "Registration Error",
+          description: data.message || "There was an error registering the user.",
         });
       }
     } catch (error) {
-      console.error("Error al registrar usuario:", error);
+      console.error("Error registering user:", error);
       notification.error({
-        message: "Error del Servidor",
-        description: "No se pudo conectar al servidor. Intenta nuevamente más tarde.",
+        message: "Server Error",
+        description: "Could not connect to the server. Please try again later.",
       });
     }
   };
 
   return (
     <div className="register-container">
-      <h2 className="register-title">Registro de Usuario</h2>
+      <h2 className="register-title">User Registration</h2>
       <Form
         name="register"
         labelCol={{ span: 8 }}
@@ -61,42 +67,52 @@ const Register = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
+        {/* Name Field */}
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please enter your name!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        {/* Email Field */}
         <Form.Item
           label="Email"
           name="email"
           rules={[
-            { required: true, message: "Por favor ingresa tu correo electrónico!" },
-            { type: "email", message: "Por favor ingresa un correo electrónico válido!" },
+            { required: true, message: "Please enter your email!" },
+            { type: "email", message: "Please enter a valid email!" },
           ]}
         >
           <Input />
         </Form.Item>
 
-        {/* Campo de Contraseña */}
+        {/* Password Field */}
         <Form.Item
-          label="Contraseña"
+          label="Password"
           name="password"
           rules={[
-            { required: true, message: "Por favor ingresa tu contraseña!" },
-            { min: 6, message: "La contraseña debe tener al menos 6 caracteres." },
+            { required: true, message: "Please enter your password!" },
+            { min: 6, message: "Password must be at least 6 characters." },
           ]}
         >
           <Input.Password />
         </Form.Item>
 
-        {/* Campo Confirmar Contraseña */}
+        {/* Confirm Password Field */}
         <Form.Item
-          label="Confirmar Contraseña"
+          label="Confirm Password"
           name="confirmPassword"
           dependencies={["password"]}
           rules={[
-            { required: true, message: "Por favor confirma tu contraseña!" },
+            { required: true, message: "Please confirm your password!" },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("Las contraseñas no coinciden!"));
+                return Promise.reject(new Error("Passwords do not match!"));
               },
             }),
           ]}
@@ -104,10 +120,17 @@ const Register = () => {
           <Input.Password />
         </Form.Item>
 
-        {/* Botón de Registro */}
+        {/* Birthdate Field */}
+        <Form.Item
+          label="Birthdate"
+          name="birthdate"
+          rules={[{ required: true, message: "Please select your birthdate!" }]}
+        >
+          <DatePicker format="YYYY-MM-DD" />
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Registrar
+            Register
           </Button>
         </Form.Item>
       </Form>

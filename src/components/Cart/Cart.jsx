@@ -13,7 +13,7 @@ const Cart = () => {
       setLoading(true);
       const token = localStorage.getItem("token"); 
       if (!token) {
-        throw new Error("Usuario no autenticado");
+        throw new Error("User not authenticated");
       }
 
       const orderData = {
@@ -26,14 +26,14 @@ const Cart = () => {
 
       await createOrder(orderData, token);
       notification.success({
-        message: "Pedido creado",
-        description: "Tu pedido se ha creado exitosamente.",
+        message: "Order created",
+        description: "Your order has been created successfully.",
       });
     } catch (error) {
-      console.error("Error al crear el pedido:", error);
+      console.error("Error creating order:", error);
       notification.error({
         message: "Error",
-        description: "Hubo un problema al crear tu pedido. Intenta nuevamente.",
+        description: "There was an issue creating your order. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -43,22 +43,22 @@ const Cart = () => {
   const handleRemoveProduct = (productId) => {
     removeCart(productId);
     notification.info({
-      message: "Producto eliminado",
-      description: "El producto ha sido eliminado del carrito.",
+      message: "Product removed",
+      description: "The product has been removed from the cart.",
     });
   };
 
   if (cart.length === 0) {
     return (
       <div className="cart-empty">
-        <Empty description="El carrito está vacío" />
+        <Empty description="The cart is empty" />
       </div>
     );
   }
 
   return (
     <div className="cart-container">
-      <h2 className="cart-title">Tu Carrito</h2>
+      <h2 className="cart-title">Your Cart</h2>
       <div className="cart-products">
         {cart.map((product) => (
           <Card
@@ -66,7 +66,7 @@ const Cart = () => {
             className="cart-product-card"
             title={product.name}
             bordered={false}
-            extra={`Precio: ${product.price} €`}
+            extra={`Price: ${product.price} €`}
             actions={[
               <Button
                 type="text"
@@ -74,11 +74,11 @@ const Cart = () => {
                 icon={<DeleteOutlined />}
                 onClick={() => handleRemoveProduct(product._id)}
               >
-                Eliminar
+                Remove
               </Button>,
             ]}
           >
-            <p>{product.description || "Sin descripción disponible"}</p>
+            <p>{product.description || "No description available"}</p>
           </Card>
         ))}
       </div>
@@ -92,7 +92,7 @@ const Cart = () => {
           icon={<ShoppingCartOutlined />}
           loading={loading}
         >
-          Crear pedido
+          Create Order
         </Button>
       </div>
     </div>

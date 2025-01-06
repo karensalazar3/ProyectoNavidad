@@ -10,9 +10,16 @@
   border-radius: 8px 8px 0 0;
 
   .header-logo {
-    font-size: 1.5rem;
+    .header-logo {
+      img.logo {
+        height: 50px; /* Ajusta el tamaño según sea necesario */
+        width: auto;
+      }
+    }
+    
+    /*font-size: 1.5rem;
     font-weight: bold;
-    color:  #f06292; 
+    color:  #f06292; */
 
     a {
       text-decoration: none;

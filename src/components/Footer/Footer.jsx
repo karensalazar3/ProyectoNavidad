@@ -4,12 +4,12 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer__content">
-        <p className="footer__text">© {new Date().getFullYear()} Adornate con amor 'Productos Hechos a mano con mucho amor'.</p>
+        <p className="footer__text">© {new Date().getFullYear()} Adornate con amor'Handmade products with lots of love'.</p>
         <nav className="footer__nav">
-          <a href="/home" className="footer__link">Inicio</a>
-          <a href="/products" className="footer__link">Productos</a>
-          <a href="/profile" className="footer__link">Perfil</a>
-          <a href="/cart" className="footer__link">Carrito</a>
+          <a href="/home" className="footer__link">Home</a>
+          <a href="/products" className="footer__link">Products</a>
+          <a href="/profile" className="footer__link">Profile</a>
+          <a href="/cart" className="footer__link">Cart</a>
         </nav>
       </div>
     </footer>

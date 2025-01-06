@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react"; 
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
 import { Avatar, Space, Button, Badge, Menu, Dropdown } from "antd";
@@ -24,11 +24,11 @@ const Header = () => {
   const userMenu = (
     <Menu>
       <Menu.Item key="profile">
-        <Link to="/profile">Perfil</Link>
+        <Link to="/profile">Profile</Link>
       </Menu.Item>
       <Menu.Item key="logout">
         <Button onClick={logoutUser} type="link">
-          Cerrar sesión
+          Logout
         </Button>
       </Menu.Item>
     </Menu>
@@ -40,7 +40,7 @@ const Header = () => {
         <Link to="/">Adornate con amor</Link>
       </div>
       <div className="header-links">
-        <Link to="/">Inicio</Link>
+        <Link to="/">Home</Link>
         {user ? (
           <>
             <Link to="/cart">
@@ -55,7 +55,10 @@ const Header = () => {
             </Dropdown>
           </>
         ) : (
-          <Link to="/login">Iniciar sesión</Link>
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link> 
+          </>
         )}
       </div>
     </div>
