@@ -5,18 +5,30 @@ import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Cart.scss";
 
 const Cart = () => {
-  const { cart, clearCart, createOrder } = useContext(ProductContext);
+  const { cart, removeCart, createOrder } = useContext(ProductContext); 
   const [loading, setLoading] = useState(false);
 
   const handleCreateOrder = async () => {
     try {
       setLoading(true);
-      await createOrder();
+      const token = localStorage.getItem("token"); 
+      if (!token) {
+        throw new Error("Usuario no autenticado");
+      }
+
+      const orderData = {
+        items: cart.map((product) => ({
+          productId: product._id,
+          quantity: 1,
+        })),
+        total: cart.reduce((sum, product) => sum + (parseFloat(product.price) || 0), 0),
+      };
+
+      await createOrder(orderData, token);
       notification.success({
         message: "Pedido creado",
         description: "Tu pedido se ha creado exitosamente.",
       });
-      clearCart(); // Vacia el carrito desde el contexto
     } catch (error) {
       console.error("Error al crear el pedido:", error);
       notification.error({
@@ -26,6 +38,14 @@ const Cart = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRemoveProduct = (productId) => {
+    removeCart(productId);
+    notification.info({
+      message: "Producto eliminado",
+      description: "El producto ha sido eliminado del carrito.",
+    });
   };
 
   if (cart.length === 0) {
@@ -42,23 +62,30 @@ const Cart = () => {
       <div className="cart-products">
         {cart.map((product) => (
           <Card
-            key={product._id} 
+            key={product._id}
             className="cart-product-card"
             title={product.name}
             bordered={false}
             extra={`Precio: ${product.price} €`}
+            actions={[
+              <Button
+                type="text"
+                danger
+                icon={<DeleteOutlined />}
+                onClick={() => handleRemoveProduct(product._id)}
+              >
+                Eliminar
+              </Button>,
+            ]}
           >
             <p>{product.description || "Sin descripción disponible"}</p>
           </Card>
         ))}
       </div>
       <h3 className="cart-total">
-      Total: {cart.reduce((sum, product) => sum + (parseFloat(product.price) || 0), 0)} €
+        Total: {cart.reduce((sum, product) => sum + (parseFloat(product.price) || 0), 0)} €
       </h3>
       <div className="cart-actions">
-        <Button onClick={clearCart} danger icon={<DeleteOutlined />}>
-          Vaciar carrito
-        </Button>
         <Button
           onClick={handleCreateOrder}
           type="primary"

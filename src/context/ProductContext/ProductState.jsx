@@ -16,7 +16,6 @@ export const ProductContext = createContext(initialState);
 export const ProductProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ProductReducer, initialState);
 
-
   const fetchProducts = async () => {
     try {
       const res = await axios.get(API_URL + "/getAll");
@@ -29,25 +28,41 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
-
   const addCart = (product) => {
     const updatedCart = [...state.cart, product];
     dispatch({
       type: "ADD_TO_CART",
       payload: updatedCart,
     });
-  
+
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  
   const removeCart = (productId) => {
-    const updatedCart = state.cart.filter(item => item._id !== productId);
+    const updatedCart = state.cart.filter((item) => item._id !== productId);
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: updatedCart,
     });
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+    localStorage.setItem("cart", JSON.stringify([]));
+  };
+
+  const createOrder = async () => {
+    try {
+      const res = await axios.post("http://localhost:3000/orders", {
+        products: state.cart,
+      });
+      console.log("Orden creada:", res.data);
+      return res.data;
+    } catch (error) {
+      console.error("Error al crear el pedido:", error);
+      throw error;
+    }
   };
 
   return (
@@ -57,7 +72,9 @@ export const ProductProvider = ({ children }) => {
         cart: state.cart,
         fetchProducts,
         addCart,
-        removeCart, 
+        removeCart,
+        clearCart,
+        createOrder,
       }}
     >
       {children}
