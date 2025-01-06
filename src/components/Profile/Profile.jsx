@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { Card, Spin } from 'antd';
-import './Profile.scss'; // Asegúrate de importar el archivo SCSS
+import './Profile.scss'; 
 
 const Profile = () => {
   const { getUserInfo, user } = useContext(UserContext);
@@ -9,11 +9,10 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Obtener información del usuario
     getUserInfo();
 
-    // Obtener los pedidos del usuario
-    fetch('/api/orders') // Cambia esta URL según tu API
+  
+    fetch('/api/orders') 
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
@@ -25,7 +24,6 @@ const Profile = () => {
       });
   }, [getUserInfo]);
 
-  // Verificación de que los datos del usuario estén cargados
   if (loading) {
     return (
       <div className="profile-loading">
