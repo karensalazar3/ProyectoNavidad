@@ -57,7 +57,7 @@ Clona el repositorio:
 bash
 Copiar código
 git clone https://github.com/karensalazar3/ProyectoNavidad
-cd tu-proyecto
+
 # ✨ Diseño
 El diseño visual del proyecto utiliza colores suaves como el fucsia, rosa, blanco, gris y fondo negro, creando una experiencia de usuario moderna y atractiva. Además, se implementan animaciones sutiles para mejorar la interactividad de la tienda.
 # Autor: 
