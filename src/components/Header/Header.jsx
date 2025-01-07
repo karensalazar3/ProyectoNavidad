@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"; 
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext/UserState";
 import { Avatar, Space, Button, Badge, Menu, Dropdown } from "antd";
@@ -57,7 +57,7 @@ const Header = () => {
         ) : (
           <>
             <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link> 
+            <Link to="/register">Register</Link>
           </>
         )}
       </div>

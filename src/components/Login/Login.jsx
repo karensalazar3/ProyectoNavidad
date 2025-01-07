@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from "antd"; 
+import { Button, Form, Input, message } from "antd";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const Login = () => {
     try {
       await login(values);
       message.success("Login successful");
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       message.error(error.message || "Error logging in. Please check your credentials.");
     }

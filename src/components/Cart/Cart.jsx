@@ -5,13 +5,13 @@ import { ProductContext } from "../../context/ProductContext/ProductState";
 import "./Cart.scss";
 
 const Cart = () => {
-  const { cart, removeCart, createOrder } = useContext(ProductContext); 
+  const { cart, removeCart, createOrder } = useContext(ProductContext);
   const [loading, setLoading] = useState(false);
 
   const handleCreateOrder = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("User not authenticated");
       }

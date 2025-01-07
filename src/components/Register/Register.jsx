@@ -2,6 +2,7 @@ import { Button, Form, Input, notification, DatePicker } from "antd"; // Import 
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { useNavigate } from "react-router-dom";
+
 import "./Register.scss";
 
 const Register = () => {
@@ -11,14 +12,13 @@ const Register = () => {
   const onFinish = async (values) => {
     console.log("Register Success:", values);
 
-    // Make sure the birthdate is in the correct format (YYYY-MM-DD)
     const formattedValues = {
       ...values,
-      birthdate: values.birthdate ? values.birthdate.toISOString().split('T')[0] : "", // Format the date to "YYYY-MM-DD"
+      birthdate: values.birthdate ? values.birthdate.format("YYYY-MM-DD") : "", // Format the date
     };
 
     try {
-      const response = await fetch("http://localhost:3000/users/register", {
+      const response = await fetch("http://localhost:3000/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +82,7 @@ const Register = () => {
           name="email"
           rules={[
             { required: true, message: "Please enter your email!" },
-            { type: "email", message: "Please enter a valid email!" },
+            { type: "email", message: "Please enter a valid email address!" },
           ]}
         >
           <Input />
@@ -94,7 +94,7 @@ const Register = () => {
           name="password"
           rules={[
             { required: true, message: "Please enter your password!" },
-            { min: 6, message: "Password must be at least 6 characters." },
+            { min: 6, message: "The password must be at least 6 characters long." },
           ]}
         >
           <Input.Password />
@@ -112,7 +112,7 @@ const Register = () => {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("Passwords do not match!"));
+                return Promise.reject(new Error("The passwords do not match!"));
               },
             }),
           ]}
@@ -128,6 +128,8 @@ const Register = () => {
         >
           <DatePicker format="YYYY-MM-DD" />
         </Form.Item>
+
+        {/* Register Button */}
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Register

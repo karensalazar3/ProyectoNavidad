@@ -1,42 +1,64 @@
-## E-Commerce Frontend - Tienda de Ropa
-- Descripción:
-Este proyecto es la implementación del frontend de una tienda de ropa en línea, que permite a los usuarios registrarse, iniciar sesión, ver productos, añadirlos al carrito, crear pedidos y gestionar su perfil. El backend está basado en una API previamente desarrollada.
+## E-Commerce - Tienda de Ropa Online 💞🛍️
+¡Bienvenido a nuestro proyecto de E-Commerce! Este proyecto integra tanto el frontend como el backend, permitiendo la creación de una tienda online completa donde los usuarios pueden registrarse, iniciar sesión, ver productos, añadirlos al carrito de compra, crear pedidos y gestionar su perfil.
 
-Este frontend se construyó utilizando React, React Router para la navegación, Context API para la gestión del estado, y SASS para el estilo.
+# 🎯 Objetivo del Proyecto
+Este proyecto unifica todo lo aprendido hasta ahora y permite aplicar conceptos de desarrollo frontend y backend en una aplicación de comercio electrónico. Los usuarios pueden:
 
-# Funcionalidades
-# 1. Registro de Usuario
-Los usuarios pueden registrarse en la tienda con su nombre, correo electrónico y contraseña. Después de registrarse, serán redirigidos a la página de inicio de sesión.
+Registrarse e iniciar sesión.
+Ver y añadir productos al carrito.
+Crear pedidos.
+Consultar su perfil con información personal y pedidos.
+Cerrar sesión (logout).
+# 🛠 Tecnologías Utilizadas
+# Frontend:
+- 
+- React Router
+- Context API
+- SASS (para el estilo)
+- Axios (para peticiones HTTP)
+# Backend:
+- Node.js
+- Express
+- MySQL
+- CORS (para las peticiones API)
+# 🚀 Requisitos del Proyecto
+El proyecto debe cumplir con los siguientes requisitos:
 
+# Frontend:
+- Registro de usuarios.
+- Login de usuarios.
+- Ver productos y añadir al carrito.
+- Crear pedidos.
+- Visualizar el perfil de usuario con datos personales y pedidos.
+- Logout.
+# Backend:
+API para gestionar productos, pedidos y usuarios.
+Se deben utilizar las rutas del backend ya creadas en el proyecto anterior.
+# 🧑‍💻 Estructura del Proyecto
+# Componentes Frontend:
+- Register: Registro de usuario.
+- Login: Formulario de inicio de sesión.
+- Home: Página principal con los productos.
+- Products: Componente que maneja la visualización de - productos, con useEffect para la petición getProducts().
+- Cart: Carrito de compras.
+- Profile: Página de perfil con los datos del usuario logueado y sus pedidos.
+- Header: Cabecera de la tienda.
+- Footer: Pie de página de la tienda.
+# Rutas del Proyecto:
+- /home: Página principal.
+- /login: Página de inicio de sesión.
+- /register: Página de registro de usuario.
+- /profile: Página de perfil de usuario.
 
-# 2. Login de Usuario
-Los usuarios pueden iniciar sesión utilizando sus credenciales. Después de iniciar sesión, el usuario será redirigido al perfil y podrá ver sus productos añadidos al carrito.
-
-
-# 3. Ver Productos
-El usuario puede navegar por los productos disponibles en la tienda. Los productos se cargan automáticamente desde la API cuando se accede a la página de inicio.
-
-
-# 4. Añadir al Carrito
-Los usuarios pueden añadir productos al carrito de compras haciendo clic en un botón de "Añadir al Carrito". Los productos seleccionados se mantendrán en el carrito hasta que el usuario decida realizar un pedido.
-
-
-# 5. Crear Pedido
-Al finalizar la compra, el usuario puede proceder a crear el pedido y se le mostrará un resumen de su compra. Este proceso se maneja a través de una llamada API a la backend.
-
-# 6. Ver Perfil de Usuario
-Los usuarios pueden ver su perfil y los pedidos realizados. Además, pueden editar sus datos de usuario.
-
-# 7. Logout
-Los usuarios pueden cerrar sesión desde cualquier página de la aplicación. Esto eliminará sus datos de sesión y los redirigirá a la página de inicio de sesión.
-
-# Tecnologías Usadas
-React: Biblioteca principal para construir la interfaz de usuario.
-React Router: Para la navegación entre diferentes páginas de la aplicación.
-React Context API: Para la gestión del estado global.
-SASS: Para los estilos, haciendo uso de variables como colors.scss para personalizar el diseño.
-Axios: Para realizar las peticiones HTTP al backend.
-
-# License
-Este proyecto está licenciado bajo la MIT License.
-
+# Backend:
+Para habilitar las peticiones desde el frontend a la API, necesitas instalar el módulo de CORS.
+# 💻 Instalación y Ejecución
+Clona el repositorio:
+bash
+Copiar código
+git clone https://github.com/karensalazar3/ProyectoNavidad
+cd tu-proyecto
+# ✨ Diseño
+El diseño visual del proyecto utiliza colores suaves como el fucsia, rosa, blanco, gris y fondo negro, creando una experiencia de usuario moderna y atractiva. Además, se implementan animaciones sutiles para mejorar la interactividad de la tienda.
+# Autor: 
+Karen Salazar 💕

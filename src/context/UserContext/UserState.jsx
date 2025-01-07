@@ -8,7 +8,7 @@ const user = JSON.parse(localStorage.getItem("user")) || null;
 const initialState = {
   token: token,
   user: user,
-  isAuthenticated: !!token, 
+  isAuthenticated: !!token,
 };
 
 const API_URL = "http://localhost:3000/users";
@@ -18,7 +18,7 @@ export const UserContext = createContext(initialState);
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  // Función para registrar usuarios
+  
   const register = async (userData) => {
     try {
       const res = await axios.post(`${API_URL}/register`, userData);
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         dispatch({
-          type: "REGISTER",
+          type: "LOGIN", 
           payload: res.data,
         });
       }
@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Función para iniciar sesión
+  
   const login = async (userData) => {
     try {
       const res = await axios.post(`${API_URL}/login`, userData);
@@ -54,13 +54,13 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Función para obtener la información del usuario
+  
   const getUserInfo = async () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(`${API_URL}/getInfo`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Asegura que el token esté en formato correcto
+          Authorization: `Bearer ${token}`,
         },
       });
       dispatch({
@@ -73,12 +73,11 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Función para cerrar sesión
   const logout = () => {
     try {
-      dispatch({ type: "LOGOUT" });
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      dispatch({ type: "LOGOUT" });
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
@@ -89,7 +88,7 @@ export const UserProvider = ({ children }) => {
       value={{
         token: state.token,
         user: state.user,
-        isAuthenticated: state.isAuthenticated,
+        isAuthenticated: !!state.token, 
         register,
         login,
         getUserInfo,

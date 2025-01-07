@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext/UserState";
 import { Card, Spin } from 'antd';
-import './Profile.scss'; 
+import './Profile.scss';
 
 const Profile = () => {
   const { getUserInfo, user } = useContext(UserContext);
@@ -11,8 +11,8 @@ const Profile = () => {
   useEffect(() => {
     getUserInfo();
 
-  
-    fetch('/api/orders') 
+
+    fetch('/api/orders')
       .then((res) => res.json())
       .then((data) => {
         setOrders(data);
